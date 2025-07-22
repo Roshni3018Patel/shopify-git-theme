@@ -1,0 +1,64 @@
+{{ 'quiz.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-quiz.js' | asset_url }}" defer="defer"></script>
+<h1>{{ section.settings.title }}</h1>
+
+<div id="messageContainer" style="display: none; color: red; text-align: center; margin-bottom: 10px;">
+  Please select an option
+</div>
+
+<section class="quiz-container">
+  {% for block in section.blocks %}
+    <form class="question-form" data-section="{{ block }}">
+      <h2>{{ block.settings.questions }}</h2>
+      {% assign options = block.settings.options | newline_to_br | split: '<br />' %}
+      {% for option in options %}
+        <label class="quizOpt">
+          <input type="radio" name="forRadio" class="quizOptions" value="{{ option}}">
+          {{ option }} </label
+        ><br>
+      {% endfor %}
+    </form>
+  {% endfor %}
+  <button class="back-btn">Back</button>
+  <button class="submit-btn">Submit</button>
+  <button class="next-btn">Next</button>
+</section>
+
+<div class="products"></div>
+
+{% schema %}
+{
+  "name": "Section quiz",
+  "settings": [
+     {
+    "type": "inline_richtext",
+    "id": "title",
+    "default": "Product quiz",
+    "label": "heading"
+  }
+  ],
+ "blocks":[
+     {
+     "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+           "type": "inline_richtext",
+          "id": "questions",
+          "label": "Questions"
+        },
+        {
+           "type": "textarea",
+          "id": "options",
+          "label": "Options"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section quiz"
+    }
+  ]
+}
+{% endschema %}

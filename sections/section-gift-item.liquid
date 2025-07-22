@@ -1,0 +1,98 @@
+<div class="product-container" id="gift-item">
+  {% for block in section.blocks %}
+    <h1 class="heading">{{ block.settings.title }}</h1>
+
+    <div class="product-list-container">
+      {% for product in block.settings.collection.products %}
+        {%- for productCollection in product.collections -%}
+          <div
+            class="product-card"
+            data-product-id="{{ product.first_available_variant.id }}"
+            data-product-handle="{{ product.handle }}"
+            data-product-collection="{{ productCollection.title }}"
+            data-product-price="{{ block.settings.price }}"
+            id="gift-products"
+          >
+            <a href="{{ product.url }}" id="{{ section.id }}" class="collections">
+              {{ product.images[0] | img_url: 'medium' | img_tag }}
+              <h3 class="product-title">{{ product.title }}</h3>
+              <p class="product-price">{{ product.price | money }}</p>
+            </a>
+            <button class="gift-add-to-cart" disabled>Add to Cart</button>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+   .product-container
+    {
+        overflow-x: scroll;
+    }
+
+  .product-list-container {
+          display: inline-flex;
+            padding: 40px;
+        }
+      a:link {
+      text-decoration: none;
+    }
+  #gift-products
+  {
+     height: 500px;
+    width:330px;
+      margin: 20px;
+    margin-left:0;
+    padding: 60px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+  }
+        .product-title {
+          font-size: 20px;
+          margin: 10px;
+        }
+        .product-price {
+          font-weight: bold;
+          margin: 10px;
+        }
+</style>
+
+{% schema %}
+{
+  "name": "Gift Items",
+
+    "blocks":
+  [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+             {
+    "type": "text",
+      "id": "price",
+      "label": "Select Price"
+    },
+         {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Heading"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Items "
+    }
+  ]
+}
+{% endschema %}

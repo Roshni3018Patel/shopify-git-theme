@@ -1,0 +1,53 @@
+<div class="plus-minus-input">
+  <button type="button" class="quantity-number" data-quantity="minus" data-field="quantity">
+    <i class="fa fa-minus" aria-hidden="true"></i>
+  </button>
+  <input class="product-qty" type="number" name="quantity" value="1" min="1" max="50">
+  <button type="button" class="quantity-number" data-quantity="plus" data-field="quantity">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+</div>
+
+<script>
+  $('[data-quantity="plus"]').click(function(e){
+       e.preventDefault();
+       fieldName = $(this).attr('data-field');
+       var currentVal = parseInt($('input[name='+fieldName+']').val());
+       if (!isNaN(currentVal)) {
+           $('input[name='+fieldName+']').val(currentVal + 1);
+       } else {
+           $('input[name='+fieldName+']').val(1);
+       }
+   });
+   $('[data-quantity="minus"]').click(function(e) {
+       e.preventDefault();
+       fieldName = $(this).attr('data-field');
+       var currentVal = parseInt($('input[name='+fieldName+']').val());
+       if (!isNaN(currentVal) && currentVal > 1) {
+           $('input[name='+fieldName+']').val(currentVal - 1);
+       } else {
+         $('input[name='+fieldName+']').val(1);
+       }
+   });
+</script>
+
+<style>
+    .product-qty{
+    background-color:aqua;
+     text-align: center;
+     border:none;
+     font-size:15px;
+  }
+  .plus-minus-input{
+      background-color:aqua;
+      height: 50px;
+      width: 45%;
+    padding: 12px;
+    border-radius: 25px;
+
+  }
+  .quantity-number{
+     background-color:aqua;
+    border: none;
+  }
+</style>

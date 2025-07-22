@@ -1,0 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "quiz_tQnb9y": {
+      "type": "quiz",
+      "blocks": {
+        "question_GXkAfN": {
+          "type": "question",
+          "settings": {
+            "questions": "Please select your Gender.",
+            "options": "Mail\nFemail"
+          }
+        },
+        "question_wgrN9d": {
+          "type": "question",
+          "settings": {
+            "questions": "Which type Product would you like to buy?",
+            "options": "Femail/Cloths\nFemail/Jewellery\nFemail/Beauty\nMail/cloths"
+          }
+        },
+        "question_WApQKL": {
+          "type": "question",
+          "settings": {
+            "questions": "What do you want to have?",
+            "options": "cloths/Men-shirt \ncloths/T shirt\nCloths/Womens One piece Western Wear\nCloths/Kurta\nCloths/Shirt\nJewellery/Nacklas\nJewellery/Bracelet\nJewellery/Ring\nBeauty/Lotus Fashwash\nBeauty/Olay cream"
+          }
+        },
+        "question_KnTj43": {
+          "type": "question",
+          "settings": {
+            "questions": "Which Category of product do you want to buy?",
+            "options": "Shirt/Black\nShirt/White\nShirt/Orange\nKurta/Pink\nKurta/Black\nMen-shirt/Navy Blue\nMen-shirt/Black\nMen-shirt/White\nWomens One piece Western Wear/Red\nWomens One piece Western Wear/Dark Green\nWomens One piece Western Wear/Navy Blue\nWomens One piece Western Wear/Pink\nT shirt/White\nT shirt/Blue\nT shirt/Black\nT shirt/Gray\nT shirt/Orange\nNacklas/Leaf Design\nNacklas/Pebble Design\nNacklas/Chain Design\nRing/Gold\nRing/Silver\nRing/Diamond\nBracelet/Diamond\nBracelet/Silver\nBracelet/Gold\nLotus Fashwash/Activated Charcoal\nLotus Fashwash/Advanced Pink Glow\nLotus Fashwash/Oil Control\nOlay cream/Night Recovery\nOlay cream/Ultra Rich\nOlay cream/Collagen Peptide 24"
+          }
+        }
+      },
+      "block_order": [
+        "question_GXkAfN",
+        "question_wgrN9d",
+        "question_WApQKL",
+        "question_KnTj43"
+      ],
+      "settings": {
+        "title": "Product Quiz"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "quiz_tQnb9y"
+  ]
+}

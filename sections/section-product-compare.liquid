@@ -1,0 +1,207 @@
+<h1>Products</h1>
+
+<h1>{{ section.settings.heading }}</h1>
+
+<div class="products-comapare-container" data-product-handle="{{ product.handle }}">
+  
+<div class="container pb-5 mb-2">
+    <div class="comparison-table">
+        <table class="table table-bordered" class="product-compare-table">
+            <thead class="bg-secondary">
+                <tr class="product-image-container">
+                    <td class="align-middle">
+                        <select class="form-control custom-select" id="compare-criteria" data-filter="trigger">
+                            <option value="all">Comparison criteria *</option>
+                            <option value="product-detail">Product Detail</option>
+                            <option value="variant-detail">Variant Detail</option>
+                        </select><small class="form-text text-muted">* Choose criteria to filter table below.</small>
+                        <div class="pt-3">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="differences">
+                                <label class="custom-control-label" for="differences">Show differences only</label>
+                            </div>
+                        </div>
+                    </td>
+                 
+                </tr>
+            </thead>
+            <tbody id="product-detail" data-filter="target">
+                <tr class="bg-secondary product-comapare-titles">
+                    <th class="text-uppercase">Product Detail</th>     
+                </tr>
+                <tr class="product-type">
+                    <th>Product Type</th>
+                </tr>
+                <tr class="product-vendor">
+                    <th>Product Vendor</th>
+                </tr>
+                <tr class="product-description">
+                    <th>Product Description</th>
+                </tr>
+                <tr class="product-available">
+                    <th>Availablity</th>
+                </tr>
+                <tr class="product-tags">
+                    <th>Product Tags</th>
+                </tr>
+              <tr class="product-published">
+                    <th>Product Tags</th>
+                </tr>
+            </tbody>
+            <tbody id="variant-detail" data-filter="target">
+                <tr class="bg-secondary product-comapare-titles">
+                    <th class="text-uppercase">Variant Detail</th>
+                </tr>
+                <tr class="variant-sku">
+                    <th>Variant SKU</th>
+                </tr>
+                <tr class="variant-taxable">
+                    <th>Variant Taxable</th>
+                </tr>
+                <tr class="variant-weight">
+                    <th>Variant Weight</th>
+                </tr>
+                <tr class="variant-name">
+                    <th>Variant Name</th>
+                </tr>
+                <tr class="variant-available">
+                    <th>Variant Availablity</th>
+                </tr>
+                <tr class="variant-requires_shipping">
+                    <th>Variant Require Shipping</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+
+{% stylesheet %}
+
+    .products-comapare-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+    }
+{% endstylesheet %}
+
+
+
+{% schema %}
+  {
+    "name": "Product Compare",
+    "settings": [],
+     "presets": [
+    {
+      "name": "Product Compare"
+    }
+  ]
+  }
+{% endschema %}
+
+<style>
+  .comparison-item-price {
+    margin: 10px;
+}
+  body{margin-top:20px;}
+
+.comparison-table {
+    width: 100%;
+    font-size: .875rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar
+}
+
+.comparison-table table {
+    min-width: 41rem;
+    table-layout: fixed
+}
+
+.comparison-table table tbody+tbody {
+    border-top-width: 1px
+}
+
+.comparison-table .table-bordered thead td {
+    border-bottom-width: 1px
+}
+
+.comparison-table .comparison-item {
+    position: relative;
+    padding: .875rem .75rem 1.125rem;
+    border: 1px solid #e7e7e7;
+    background-color: #fff;
+    text-align: center
+}
+
+.comparison-table .comparison-item .comparison-item-thumb {
+    display: block;
+    width: 5rem;
+    margin-right: auto;
+    margin-bottom: .75rem;
+    margin-left: auto
+}
+
+.comparison-table .comparison-item .comparison-item-thumb>img {
+    display: block;
+    width: 100%
+}
+
+.comparison-table .comparison-item .comparison-item-title {
+    display: block;
+    width: 100%;
+    margin-bottom: 14px;
+    color: #222;
+    font-weight: 600;
+    text-decoration: none
+}
+
+.comparison-table .comparison-item .comparison-item-title:hover .comparison-item-price:hover {
+    text-decoration: underline
+}
+
+.comparison-table .comparison-item .btn {
+    margin: 0
+}
+
+.comparison-table .comparison-item .remove-item {
+    display: block;
+    position: absolute;
+    top: -.3125rem;
+    right: -.3125rem;
+    width: 1.375rem;
+    height: 1.375rem;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    text-align: center;
+    cursor: pointer
+}
+
+.comparison-table .comparison-item .remove-item .feather {
+    width: .875rem;
+    height: .875rem
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #e7e7e7;
+}
+.bg-secondary {
+    background-color: #f7f7f7 !important;
+}
+  .comparison-item .comparison-item-thumb {
+  display: block;
+  width: 100px; /* adjust the width as needed */
+  height: 100px; /* adjust the height as needed */
+  margin: 10px auto; /* add some margin to center the image */
+  border-radius: 5px; /* add some border radius to make it look nicer */
+}
+
+.comparison-item .comparison-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* make the image cover the entire container */
+  border-radius: 5px; /* add some border radius to make it look nicer */
+}
+</style>

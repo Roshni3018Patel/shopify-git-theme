@@ -1,0 +1,187 @@
+{%  if section.blocks.size > 0 %}
+  <div class="tabs-section page-width">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="//code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    {%  if section.settings.useslider %}
+      <script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    {%  endif %}
+    {%  if section.settings.title != blank %}
+      <h2 class="h1">{{ section.settings.title }}</h2>
+    {%  endif  %}
+   <div class="product-list-container" id="product-grid">
+    <div id="tabs" class="tabs">
+      {%  assign tabContent = '' %}
+      <ul>
+      {%  for block in section.blocks %}
+       {%  assign collection = collections[block.settings.collection] %}
+        <li><a href="#tabs-{{ collection.id }}">{{ collection.title  }}</a></li>
+        {%  capture content  %}
+            <div id="tabs-{{ collection.id }}">
+              <ul class="grid product-grid grid--2-col-tablet-down  grid--4-col-desktop">
+               {%- for product in block.settings.collection.products -%}
+               <li class="grid__item scroll-trigger animate--slide-in">
+                 <div class="product-card" data-product-id="{{ product.selected_or_first_available_variant.id }}" data-product-handle="{{ product.handle }}" id="products">
+                  <a href="{{ product.url }}" id="{{ section.id }}" class="collections list">
+                    {{ product.featured_image | img_url: 'medium' | img_tag }}
+                    <h3 class="product-title" id="collection-product-title">{{ product.title }}</h3>
+                    <p class="product-price">{{ product.price | money }}</p>
+                  </a>
+                  {% render 'wishlist' %}
+                 <button class="btn-product-add-to-cart">Add to cart</button>
+              </div>
+               </li>
+              {%- endfor -%}
+              </ul>
+             {%  if block.settings.viewall %}
+               <div class="center collection__view-all scroll-trigger animate--slide-in">
+                 <a class="button" href="{{ block.settings.collection.url }}"> View all </a>
+               </div>
+               {%  endif  %}
+            </div>
+        {%  endcapture %}
+        {%  assign tabContent = tabContent | append: content %}
+      {%  endfor %}  
+      </ul>   
+      {{ tabContent }}
+    </div>  
+  </div> 
+ </div>
+    <script>
+  $( function() {
+   function addToCart(productId) {
+      $.ajax({
+        url: '/cart/add.js',
+        type: 'POST',
+        dataType: 'json',
+        data: { quantity: 1, id: productId },
+        success: function() {
+          window.location.href = '/cart';
+        },
+        error: function(error) {
+          console.error('Error adding item to cart:', error);
+        }
+      });
+    }
+
+    $('.btn-product-add-to-cart').click(function() {
+      var productId = $(this).closest('.product-card').data('product-id');
+      addToCart(productId);
+    });
+    {%  if section.settings.useslider %}
+    function tabSlider(){
+          $('.tabs .product-grid.slick-initialized ').slick('unslick');
+          $('.tabs .product-grid ').slick({
+            dots: false,
+            arrows: true,
+            infinite: false,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            responsive: [
+              {
+                breakpoint: 1024,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                  infinite: true
+                }
+              },
+              {
+                breakpoint: 600,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 2
+                }
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+            
+            ]
+          });
+    }
+        {%  endif %}
+    $( "#tabs" ).tabs({
+      create: function( event, ui ) {
+         {%  if section.settings.useslider %}
+       tabSlider();
+            {%  endif %}
+      },
+      activate: function( event, ui ) {
+        {%  if section.settings.useslider %}
+       tabSlider();
+            {%  endif %}
+      }
+    });
+  } );
+  </script>
+  <style>
+    #collection-product-title{ font-size: 20px; padding-top: 5px;}
+    img{ max-width: 100% width: 180px; height: 180px;}
+  .tabs .slick-track .grid__item { padding: 0 5px; }
+  .tabs .slick-next { right: 0; }
+  .tabs .slick-prev { left: 0; }
+  .tabs .slick-next, .tabs .slick-prev { transform: none; top: -20px; }
+  .tabs .slick-next::before, .tabs .slick-prev::before { color: #000; }
+  .tabs .slick-slider { margin: 0 -5px; }
+  .tabs .collection__view-all a { color: white !important; }
+  .tabs { background: none !important; border: none !important; }
+  .tabs.ui-tabs .ui-tabs-nav { background: none; padding: 0; display: flex; justify-content: center; border: none; }
+  .tabs-section h2 { text-align: center; }
+  .tabs.ui-tabs .ui-tabs-nav li { border: none; background: none; }
+  .tabs.ui-tabs .ui-tabs-nav li a { color: #ddd; padding: 5px 40px; border-radius: 50px; }
+  .tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active a { background: grey; }
+  </style>
+{%  endif %}  
+
+{% schema %}
+  {
+      "name": "Custom collection slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+       {
+        "type": "checkbox",
+        "id": "useslider",
+        "label": "Use slider",
+        "default": true
+      }
+    ],
+    "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "limit": 5,
+    
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "viewall",
+        "label": "Show view all",
+        "default": true
+      }
+    ]
+    }
+  ],
+    "presets": [
+    {
+      "name": "Custom collection slider"
+    }
+  ]
+  }
+{% endschema %}

@@ -1,0 +1,128 @@
+{{ 'section-custom-product-list.css' | asset_url | stylesheet_tag }}
+
+<!--
+  <h1>{{ section.settings.title | append: ' ' | append: section.settings.collection.title }}</h1>
+
+  <div class="product-container">
+    <div class="product-list-containerr">
+      {% for product in section.settings.collection.products %}
+        <div
+          class="product-card"
+          data-product-id="{{ product.id }}"
+          data-product-handle="{{ product.handle }}"
+          id="products"
+        >
+          <a href="{{ product.url }}" id="{{ section.id }}" class="collections">
+            {{ product.images[0] | img_url: 'medium' | img_tag }}
+            <h3 class="product-title">{{ product.title }}</h3>
+            <p class="product-price">{{ product.price | money }}</p>
+            {% comment %}
+              <p class="product-price">{{ product.price | money_with_currency }}</p>
+              <p class="product-price">{{ product.price | money_without_currency }}</p>
+              <p class="product-price">{{ product.price | money_without_trailing_zeros }}</p>
+            {% endcomment %}
+          </a>
+
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+-->
+{% for block in section.blocks %}
+  <h1>{{ section.settings.title | append: ' ' | append: block.settings.collection.title }}</h1>
+  <div class="product-container">
+    <div class="product-list-container">
+      {% for product in block.settings.collection.products %}
+        <div
+          class="product-card"
+          data-product-id="{{ product.id }}"
+          data-product-handle="{{ product.handle }}"
+          id="products"
+        >
+          <a href="{{ product.url }}" id="{{ section.id }}" class="collections">
+            {{ product.images[0] | img_url: 'medium' | img_tag -}}
+            <h3 class="product-title">{{ product.title }}</h3>
+            <p class="product-price">{{ product.price | money }}</p>
+          </a>
+          {% render 'wishlist' %}
+          {% render 'quik-shop' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+
+<h1>{{ section.settings.heading }}</h1>
+
+<div class="product-container">
+  <div class="product-list-container">
+    {% for product-list in section.settings.collection_list %}
+      {% for product in product-list.products %}
+        <div
+          class="product-card"
+          data-product-id="{{ product.id }}"
+          data-product-handle="{{ product.handle }}"
+          id="products"
+        >
+          <a href="{{ product.url }}" id="{{ section.id }}" class="collections list">
+            {{ product.featured_image | img_url: 'medium' | img_tag }}
+            <h3 class="product-title">{{ product.title }}</h3>
+            <p class="product-price">{{ product.price | money }}</p>
+          </a>
+          {% render 'wishlist' %}
+          {% render 'quik-shop' %}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom-Collection",
+  "settings": [
+     {
+    "type": "inline_richtext",
+    "id": "title",
+    "default": "Products in  ",
+    "label": "Heading"
+  },
+    {
+    "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+    "type": "collection_list",
+      "id": "collection_list",
+      "label": "Select Collection list"
+    },
+      {
+    "type": "inline_richtext",
+    "id": "heading",
+    "default": "Collection List",
+    "label": "Heading"
+  }
+  ],
+  "blocks":
+  [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        }
+      ]
+
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom-Collection"
+    }
+  ]
+}
+{% endschema %}

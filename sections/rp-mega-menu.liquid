@@ -1,0 +1,660 @@
+{% comment %} <div class="container">
+  <div class="content">
+    <div class="products"></div>
+  </div>
+</div>
+
+<script>
+      const data = [
+  {
+    id: 1,
+    name: "Fire Boltt Ninja 2",
+    img: "https://m.media-amazon.com/images/I/617eiZeFtNL._SL1500_.jpg",
+    amt: 1599,
+    seller: "Boltt Store",
+    catagory: "Watch",
+  },
+
+  {
+    id: 2,
+    name: "Noise Pulse Go",
+    img: "https://m.media-amazon.com/images/I/61akt30bJsL._SL1500_.jpg",
+    amt: 1300,
+    seller: "Noise Store",
+    catagory: "Watch",
+  },
+
+  {
+    id: 3,
+    name: "boAt Xtend Pro",
+    img: "https://m.media-amazon.com/images/I/61ZuL8CUigL._SL1500_.jpg",
+    amt: 2799,
+    seller: "Rajesh Watchs",
+    catagory: "Watch",
+  },
+  {
+    id: 4,
+    name: "Lenovo Tab M8",
+    img: "https://m.media-amazon.com/images/I/71SvqTFPXJL._SL1500_.jpg",
+    amt: 9270,
+    seller: "Stonehenge Retail",
+    catagory: "Tablets",
+  },
+  {
+    id: 5,
+    name: "Honor PAD X8",
+    img: "https://m.media-amazon.com/images/I/710G-VKcgtL._SL1500_.jpg",
+    amt: 12999,
+    seller: "Honor india",
+    catagory: "Tablets",
+  },
+
+  {
+    id: 6,
+    name: "IKALL N9 ",
+    img: "https://m.media-amazon.com/images/I/7185GL6hPlL._SL1500_.jpg",
+    amt: 3999,
+    seller: "IKALL Store",
+    catagory: "Tablets",
+  },
+
+  {
+    id: 7,
+    name: "Oppo Pad Air",
+    img: "https://m.media-amazon.com/images/I/513FD4w8hGL._SL1500_.jpg",
+    amt: 15999,
+    seller: "Oppo Store",
+    catagory: "Tablets",
+  },
+  {
+    id: 8,
+    name: "Acer EK220Q",
+    img: "https://m.media-amazon.com/images/I/8150iUXkc5L._SL1500_.jpg",
+    amt: 6249,
+    seller: "Accer Store",
+    catagory: "Monitors",
+  },
+  {
+    id: 9,
+    name: "Samsung 24",
+    img: "https://m.media-amazon.com/images/I/81TjRLHaz1L._SL1500_.jpg",
+    amt: 9799,
+    seller: "Samsung Store",
+    catagory: "Monitors",
+  },
+
+  {
+    id: 10,
+    name: "ZEBRONICS AC32FHD ",
+    img: "https://m.media-amazon.com/images/I/813Y1TIZwfL._SL1500_.jpg",
+    amt: 12799,
+    seller: "ZEBRONICS Store",
+    catagory: "Monitors",
+  },
+];
+
+const productsContainer = document.querySelector(".products");
+// const categoryList = document.querySelector(".category-list");
+
+  
+
+function displayProducts(products) {
+  if (products.length > 0) {
+    const product_details = products
+      .map(
+        (product) => `
+  <div class="product">
+  <div class="img">
+    <img src="${product.img}" alt="${product.name}" />
+  </div>
+  <div class="product-details">
+    <span class="name">${product.name}</span>
+    <span class="amt">Rs.${product.amt}</span>
+    <span class="seller">${product.seller}</span>
+  </div>
+</div>`
+      )
+      .join("");
+
+    productsContainer.innerHTML = product_details;
+  } else {
+    productsContainer.innerHTML = "<h3>No Products Available</h3>";
+  }
+}
+ {% endcomment %}
+// function setCategories() {
+//   const allCategories = data.map((product) => product.catagory);
+//   //console.log(allCategories);
+//   const catagories = [
+//     "All",
+//     ...allCategories.filter((product, index) => {
+//       return allCategories.indexOf(product) === index;
+//     }),
+//   ];
+//   //console.log(catagories);
+//   categoryList.innerHTML = catagories.map((catagory) => `<li>${catagory}</li>`).join("");
+
+//   categoryList.addEventListener("click", (e) => {
+//     const selectedCatagory = e.target.textContent;
+//     selectedCatagory === "All" ? displayProducts(data) : displayProducts(data.filter((product) => product.catagory == selectedCatagory));
+//   });
+// }
+// const priceRange = document.querySelector("#priceRange");
+// const priceValue = document.querySelector(".priceValue");
+
+// function setPrices() {
+//   const priceList = data.map((product) => product.amt);
+//   const minPrice = Math.min(...priceList);
+//   const maxPrice = Math.max(...priceList);
+//   priceRange.min = minPrice;
+//   priceRange.max = maxPrice;
+//   priceValue.textContent = "Rs." + maxPrice;
+
+//   priceRange.addEventListener("input", (e) => {
+//     priceValue.textContent = "Rs." + e.target.value;
+//     displayProducts(data.filter((product) => product.amt <= e.target.value));
+//   });
+// }
+
+const txtSearch = document.querySelector("#txtSearch");
+txtSearch.addEventListener("keyup", (e) => {
+  const value = e.target.value.toLowerCase().trim();
+  if (value) {
+    displayProducts(data.filter((product) => product.name.toLowerCase().indexOf(value) !== -1));
+  } else {
+    displayProducts(data);
+  }
+});
+  $(document).ready(function() {
+
+
+   $('.products').hide();
+  $('#txtSearch').click(function()
+                        {
+                          $('.products').show();
+                          console.log("show");
+                          
+                        });
+
+    $('.closebtnpopup').click(function()
+                        {
+                            $('.seachBox').val(''); 
+                          $('.products').hide();
+                        
+                          // console.log(value);
+                          
+                        });
+
+    });
+displayProducts(data);
+setCategories();
+setPrices();
+</script>
+
+<style>
+  /* .container {
+    background-color: #fff;
+    width: 95%;
+    margin: 0 auto;
+    min-height: 1000px;
+    display: flex;
+  } */
+
+  .logo {
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #e74c3c;
+    margin-bottom: 10px;
+  }
+   input[type="text"] {
+    padding: 5px 5px;
+    outline: none;
+    width: 20%;
+    margin-bottom: 15px;
+  }
+
+  .content {
+    flex: 4;
+  }
+
+  .products {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .product {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    overflow: hidden;
+  }
+
+  .product .img {
+    flex: 1;
+  }
+  .product .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: 0.5s;
+    transform: scale(0.75);
+  }
+  .product:hover img {
+    transform: scale(1);
+  }
+  .product .product-details {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-details span:nth-child(1) {
+    color: #e74c3c;
+    font-weight: 600;
+  }
+
+  .product-details span:nth-child(2) {
+    color: #2980b9;
+    font-weight: 600;
+  }
+
+  .product-details span:nth-child(3) {
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a085;
+  }
+</style>
+
+<nav class="header__inline-menu">
+  <ul class="list-menu list-menu--inline" role="list">
+    {%- for link in section.settings.menu.links -%}
+      <li>
+        {%- if link.links != blank -%}
+          <header-menu>
+            <details id="Details-HeaderMenu-{{ forloop.index }}">
+              <summary class="header__menu-item list-menu__item link focus-inset">
+                <span
+                  {%- if link.child_active %}
+                    class="header__active-menu-item"
+                  {% endif %}
+                >
+                  {{- link.title | escape -}}
+                </span>
+                {% render 'icon-caret' %}
+              </summary>
+              <ul
+                id="HeaderMenu-MenuList-{{ forloop.index }}"
+                class="header__submenu list-menu list-menu--disclosure gradient caption-large motion-reduce global-settings-popup"
+                role="list"
+                tabindex="-1"
+              >
+                {%- for childlink in link.links -%}
+                  <li>
+                    {%- if childlink.links == blank -%}
+                      <a
+                        href="{{ childlink.url }}"
+                        class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
+                        {% if childlink.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ childlink.title | escape }}
+                      </a>
+                    {%- else -%}
+                      <details id="Details-HeaderSubMenu-{{ forloop.index }}">
+                        <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
+                          <span>{{ childlink.title | escape }}</span>
+                          {% render 'icon-caret' %}
+                        </summary>
+                        <ul
+                          id="HeaderMenu-SubMenuList-{{ forloop.index }}"
+                          class="header__submenu list-menu motion-reduce"
+                        >
+                          {%- for grandchildlink in childlink.links -%}
+                            <li>
+                              {% assign subsublinktitle = grandchildlink.title | split: '| ' %}
+                              {% assign sublink_level_4 = subsublinktitle[0] %}
+                              <details id="Details-HeaderSubMenu-{{ forloop.index }}">
+                                <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
+                                  <span>{{ subsublinktitle[1] | escape }}</span>
+                                  {% render 'icon-caret' %}
+                                </summary>
+                                <ul
+                                  id="HeaderMenu-SubMenuList-{{ forloop.index }}"
+                                  class="header__submenu list-menu motion-reduce"
+                                >
+                                  {% for subsublink_sub in linklists[sublink_level_4].links %}
+                                    <li>
+                                      {% assign subsublink_subtitle = subsublink_sub.title | split: '| ' %}
+                                      {% assign sublink_level_5 = subsublink_subtitle[0] %}
+                                      <details id="Details-HeaderSubMenu-{{ forloop.index }}">
+                                        <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
+                                          <span>{{ subsublink_subtitle[1] | escape }}</span>
+                                          {% render 'icon-caret' %}
+                                        </summary>
+                                        <ul
+                                          id="HeaderMenu-SubMenuList-{{ forloop.index }}"
+                                          class="header__submenu list-menu motion-reduce"
+                                        >
+                                          {% for subsubsublink_sub in linklists[sublink_level_5].links %}
+                                            <li>
+                                              <a
+                                                href="{{ subsubsublink_sub.url }}"
+                                                class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if subsubsublink_sub.current %} list-menu__item--active{% endif %}"
+                                                {% if subsubsublink_sub.current %}
+                                                  aria-current="page"
+                                                {% endif %}
+                                              >
+                                                {{ subsubsublink_sub.title | escape }}
+                                              </a>
+                                            </li>
+                                          {%- endfor -%}
+                                        </ul>
+                                      </details>
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              </details>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </details>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          </header-menu>
+        {%- else -%}
+          <a
+            href="{{ link.url }}"
+            class="header__menu-item list-menu__item link link--text focus-inset"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            <span
+              {%- if link.current %}
+                class="header__active-menu-item"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </span>
+          </a>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
+
+{% comment %}
+  {%- for block in section.blocks -%}
+    <nav role="navigation">
+      <ul class="mega-menu-level-1">
+        {% for link in block.settings.first_mega_menu.links %}
+          <li class="menu-item">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            <span class="dropdown-icon-1">&#9662;</span>
+          </li>
+        {% endfor %}
+
+        <ul class="mega-menu-level-2">
+          {% for link in block.settings.second_mega_menu.links %}
+            <li class="menu-item">
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              <span class="dropdown-icon-2">&#9662;</span>
+            </li>
+          {% endfor %}
+
+          <ul class="mega-menu-level-3">
+            {% for link in block.settings.third_mega_menu.links %}
+              <li class="menu-item">
+                <a href="{{ link.url }}">{{ link.title }}</a>
+                <span class="dropdown-icon-3">&#9662;</span>
+              </li>
+            {% endfor %}
+
+            <ul class="mega-menu-level-4">
+              {% for link in block.settings.forth_mega_menu.links %}
+                <li class="menu-item">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                  <span class="dropdown-icon-4">&#9662;</span>
+                </li>
+              {% endfor %}
+
+              <ul class="mega-menu-level-5">
+                {% for link in block.settings.fifth_mega_menu.links %}
+                  <li class="menu-item">
+                    <a href="{{ link.url }}" class="menu-item-5">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </ul>
+          </ul>
+        </ul>
+      </ul>
+    </nav>
+  {% endfor %}
+
+  <script>
+      $(document).ready(function(){
+      $(".dropdown-icon-1").click(function(){
+        $(".mega-menu-level-2").toggle();
+      });
+            $(".dropdown-icon-2").click(function(){
+        $(".mega-menu-level-3").toggle();
+      });
+            $(".dropdown-icon-3").click(function(){
+        $(".mega-menu-level-4").toggle();
+      });
+            $(".dropdown-icon-4").click(function(){
+        $(".mega-menu-level-5").toggle();
+      });
+    });
+  </script>
+{% endcomment %}
+
+{% comment %}
+     <!-- <ul>
+          {% for sublink in link.links %}
+            <li class="menu-item">
+              <a href="{{ sublink.url }}">{{ sublink.title }}</a>
+              <span class="dropdown-icon-1">&#9662;</span>
+            </li>
+
+            <ul>
+              {% for subsublink in sublink.links %}
+                <li class="menu-item">
+                  <a href="{{ subsublink.url }}">{{ subsublink.title }}</a>
+                  <span class="dropdown-icon-1">&#9662;</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endfor %}
+        </ul> -->
+
+
+
+  {%- for block in section.blocks -%}
+    <nav class="mega-menu">
+      <ul class="mega-menu-level-1">
+        <div class="mega-menu-level-1">
+          <li class="has-dropdown" data-dropdown="dropdown-1">
+            <button class="dropdown-btn" style="color: Gray;">{{ block.settings.second_mega_menu.label }}</button>
+            <ul class="dropdown" id="dropdown-1">
+              {% for link in block.settings.first_mega_menu.links %}
+                <li>
+                  <a href="{{ link.url }}" style="color: Gray;">{{- link.title -}}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        </div>
+
+        <ul class="mega-menu-level-2">
+          <div class="mega-menu-level-2">
+            {% for link in block.settings.second_mega_menu.links %}
+              <li class="has-dropdown" data-dropdown="dropdown-2">
+                <button class="dropdown-btn" style="color: SlateBlue;">{{ link.title }}</button>
+                <ul class="dropdown" id="dropdown-2">
+                  {% for sublink in link.sublinks %}
+                    <li>
+                      <a href="{{ sublink.url }}" style="color: SlateBlue;">{{ sublink.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endfor %}
+          </div>
+
+          <ul class="mega-menu-level-3">
+            <div class="mega-menu-level-3">
+              {% for link in block.settings.third_mega_menu.links %}
+                <li class="has-dropdown" data-dropdown="dropdown-3">
+                  <button class="dropdown-btn" style="color: red;">{{ link.title }}</button>
+                  <ul class="dropdown" id="dropdown-3">
+                    {% for sublink in link.sublinks %}
+                      <li>
+                        <a href="{{ sublink.url }}" style="color: red;">{{ link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endfor %}
+            </div>
+
+            <ul class="mega-menu-level-4">
+              <div class="mega-menu-level-4">
+                {% for link in block.settings.forth_mega_menu.links %}
+                  <li class="has-dropdown" data-dropdown="dropdown-4">
+                    <button class="dropdown-btn" style="color: Violet;">{{ link.title }}</button>
+                    <ul class="dropdown" id="dropdown-4">
+                      {% for sublink in link.sublinks %}
+                        <li>
+                          <a href="{{ sublink.url }}" style="color: Violet;">{{ sublink.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% endfor %}
+              </div>
+
+              <ul class="mega-menu-level-5">
+                <div class="mega-menu-level-5">
+                  {% for link in block.settings.fifth_mega_menu.links %}
+                    <li>
+                      <a href="{{ link.url }}" style="color: black;">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </div>
+              </ul>
+            </ul>
+          </ul>
+        </ul>
+      </ul>
+    </nav>
+  {%- endfor %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var dropdownBtns = document.querySelectorAll(".has-dropdown .dropdown-btn");
+
+      dropdownBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var dropdownId = this.parentElement.getAttribute("data-dropdown");
+          var currentDropdown = document.getElementById(dropdownId);
+
+          dropdownBtns.forEach(function (otherBtn) {
+            var otherDropdownId = otherBtn.parentElement.getAttribute("data-dropdown");
+            var otherDropdown = document.getElementById(otherDropdownId);
+
+            if (otherDropdownId !== dropdownId) {
+              otherDropdown.style.display = "none";
+            }
+          });
+
+          currentDropdown.style.display = currentDropdown.style.display === "none" || currentDropdown.style.display === "" ? "block" : "none";
+        });
+      });
+    });
+  </script>
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "rp Mega Menu",
+  "settings": [
+     {
+      "type": "link_list",
+      "label": "Mega Menu Links",
+      "id": "menu_links"
+    }
+  ],
+  "blocks":[
+     {
+      "type": "link_list_1",
+      "name": "Mega Menu 1",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "first_mega_menu",
+          "label": "Mega Menu 1"
+        }
+      ]
+    },
+     {
+      "type": "link_list_2",
+      "name": "Mega Menu 2",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "second_mega_menu",
+          "label": "Mega Menu 2"
+        }
+      ]
+    },
+     {
+      "type": "link_list_3",
+      "name": "Mega Menu 3",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "third_mega_menu",
+          "label": "Mega Menu 3"
+        }
+      ]
+    },
+     {
+      "type": "link_list_4",
+      "name": "Mega Menu 4",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "forth_mega_menu",
+          "label": "Mega Menu 4"
+        }
+      ]
+    },
+     {
+      "type": "link_list_5",
+      "name": "Mega Menu 5",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "fifth_mega_menu",
+          "label": "Mega Menu 5"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "rp Mega Menu"
+    }
+  ]
+}
+{% endschema %}

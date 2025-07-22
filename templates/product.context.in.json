@@ -1,0 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "product.json",
+  "context": {
+    "market": "in"
+  },
+  "sections": {
+    "main": {
+      "settings": {},
+      "blocks": {
+        "variant_picker": {
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "buy_buttons": {
+          "settings": {
+            "show_gift_card_recipient": false
+          }
+        }
+      }
+    },
+    "related-products": {
+      "settings": {
+        "image_ratio": "portrait",
+        "show_rating": false,
+        "show_vendor": false,
+        "columns_desktop": 4,
+        "products_to_show": 4
+      },
+      "blocks": {}
+    }
+  }
+}

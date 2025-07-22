@@ -1,0 +1,180 @@
+{{ 'section-custom-product-list.css' | asset_url | stylesheet_tag }}
+
+<h1>{{ section.settings.heading }}</h1>
+
+<div class="product-list-container" id="dataContainer">
+  {% for collection in section.settings.collection_list %}
+    {% paginate collection.products by 3 %}
+      <div
+        class="products-on-page"
+        data-collection-handle="{{ collection.handle }}"
+        data-next-url="{{ paginate.next.url }}"
+      >
+        <h3>{{ section.settings.title | append: ' ' | append: collection.title }}</h3>
+        {% for product in collection.products %}
+          <div
+            class="product-card"
+            data-product-id="{{ product.id }}"
+            data-product-handle="{{ product.handle }}"
+            id="products"
+          >
+            <a href="{{ product.url }}" id="{{ product.id }}" class="Products">
+              {{ product.images[0] | img_url: 'medium' | img_tag }}
+              <h3 class="product-title">{{ product.title }}</h3>
+              <p class="product-price">{{ product.price | money }}</p>
+            </a>
+            {% render 'wishlist' %}
+
+            {% if product.has_only_default_variant %}
+              <select name="id" id="variant-select" hidden>
+                {% for variant in product.variants %}
+                  <option value="{{  product.variants.first.id}}">{{ variant.title }}</option>
+                {% endfor %}
+              </select>
+
+            {% else %}
+              <b>Varients:</b>
+              <select name="id" id="variant-select">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                {% endfor %}
+              </select>
+            {% endif %}
+
+            <label><b>Quantity:</b></label>
+            <select id="quantity">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+
+            <button class="addToCart">Add to Cart</button>
+            {% render 'quik-shop' %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endpaginate %}
+  {% endfor %}
+</div>
+
+<button class="load-more-button">Load more</button>
+
+<script>
+       $('.load-more-button').on('click', function () {
+         var button = $(this);
+         var totalCollections = $('.products-on-page').length;
+         var collectionsWithMoreProducts = 0;
+
+         $('.products-on-page').each(function () {
+           var productContainer = $(this);
+           var collectionHandle = productContainer.data('collection-handle');
+           var nextUrl = productContainer.data('next-url');
+
+           if (nextUrl) {
+             $.ajax({
+               url: nextUrl,
+               type: 'GET',
+               dataType: 'html',
+               success: function (data) {
+                 var newProductsContainer = $(data).find('.products-on-page[data-collection-handle="' + collectionHandle + '"]');
+                 var newProducts = newProductsContainer.find('.product-card');
+
+                 if (newProducts.length > 0) {
+                   productContainer.append(newProducts);
+                   var newNextUrl = newProductsContainer.data('next-url');
+                   productContainer.data('next-url', newNextUrl);
+
+                   if (!newNextUrl) {
+                     collectionsWithMoreProducts++;
+                     if (collectionsWithMoreProducts === totalCollections) {
+                       button.hide();
+                     }
+                   }
+                 } else {
+                   button.hide();
+                 }
+               },
+               error: function (error) {
+                 console.error('Error fetching products: ', error);
+               }
+             });
+           }
+         });
+       });
+
+       $('.product-list-container').on('click', '.addToCart', function () {
+         var variantId = $(this).closest('.product-card').find('#variant-select option:selected').val();
+         var quantity = $(this).closest('.product-card').find('#quantity option:selected').val();
+
+         console.log(variantId);
+         $.ajax({
+           url: '/cart/add.js',
+           type: 'POST',
+           dataType: 'json',
+           data: {
+             quantity: quantity,
+             id: variantId
+           },
+           success: function (response) {
+             window.location.href = '/cart';
+           },
+           error: function (error) {
+             console.error('Error adding item to cart:', error);
+           }
+         });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom-product-varient",
+  "settings": [
+     {
+    "type": "inline_richtext",
+    "id": "title",
+    "default": "Products in  ",
+    "label": "Heading"
+  },
+
+    {
+    "type": "collection_list",
+      "id": "collection_list",
+      "label": "Select Collection list"
+    },
+      {
+    "type": "inline_richtext",
+    "id": "heading",
+    "default": "Collection List",
+    "label": "Heading"
+  }
+  ],
+  "blocks":
+  [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        }
+      ]
+
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom-product-varient"
+    }
+  ]
+}
+{% endschema %}
+

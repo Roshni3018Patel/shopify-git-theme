@@ -1,0 +1,143 @@
+{{ 'promotion-popup.css' | asset_url | stylesheet_tag }}
+
+<div id="promotion-popup" style="display: none;">
+  <div id="popup-content">
+    <h2 id="popup-title">{{ section.settings.title }}</h2>
+    <p id="popup-discount">{{ section.settings.discount }}</p>
+    <p id="popup-description">{{ section.settings.Description }}</p>
+    <div id="popup-clock-container">
+      <div class="time-box" id="days-box">
+        <div class="time-value" id="days-value"></div>
+        <div class="time-label">Days</div>
+      </div>
+      <div class="time-box" id="hours-box">
+        <div class="time-value" id="hours-value"></div>
+        <div class="time-label">Hours</div>
+      </div>
+      <div class="time-box" id="minutes-box">
+        <div class="time-value" id="minutes-value"></div>
+        <div class="time-label">Mins</div>
+      </div>
+      <div class="time-box" id="seconds-box">
+        <div class="time-value" id="seconds-value"></div>
+        <div class="time-label">Secs</div>
+      </div>
+    </div>
+    <a href="/collections/all" class="btn-shop-now">Shop Now</a>
+    <button id="btn-no-thanks">No Thanks</button>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    function displayPopup() {
+      if (!getCookie('popupDismissed')) {
+        $('#promotion-popup').show();
+      } else {
+        // Check if the cookie has expired
+        var expirationDate = getCookieExpiration('popupDismissed');
+        var currentDate = new Date();
+        if (expirationDate && expirationDate > currentDate) {
+          $('#promotion-popup').show();
+        }
+      }
+    }
+
+    function updateClock() {
+      var now = new Date();
+      var targetDate = new Date('{{ section.settings.date }}');
+      var timeDifference = targetDate.getTime() - now.getTime();
+
+      var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      $('#days-value').text(days);
+      $('#hours-value').text(hours);
+      $('#minutes-value').text(minutes);
+      $('#seconds-value').text(seconds);
+
+      setTimeout(updateClock, 1000);
+    }
+
+    updateClock();
+
+    $('#btn-no-thanks').click(function() {
+      $('#promotion-popup').hide();
+      setCookie('popupDismissed', 'true', 1);
+    });
+
+    function setCookie(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function getCookieExpiration(cookieName) {
+      var cookieValue = getCookie(cookieName);
+      if (cookieValue) {
+        var cookieParts = cookieValue.split('|');
+        if (cookieParts.length === 2) {
+          var expirationTime = parseInt(cookieParts[1]);
+          return new Date(expirationTime);
+        }
+      }
+      return null;
+    }
+
+    displayPopup(); // Call displayPopup initially
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Promotion Popup",
+  "settings": [
+   {
+    "type": "inline_richtext",
+    "id": "title",
+    "default": "Offer",
+    "label": "Heading"
+  },
+     {
+    "type": "inline_richtext",
+    "id": "discount",
+    "default": "10% OFF",
+    "label": "Discount"
+  },
+      {
+    "type": "inline_richtext",
+    "id": "Description",
+    "default": "Get 10% off when you purchase in the next 24 hours",
+    "label": "Discount Description"
+  },
+       {
+    "type": "text",
+    "id": "date",
+    "default": "2024-05-02",
+    "label": "Discount date"
+  }
+  ],
+  "presets": [
+    {
+      "name": "Promotion Popup"
+    }
+  ]
+}
+{% endschema %}

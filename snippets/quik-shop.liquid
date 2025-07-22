@@ -1,0 +1,306 @@
+<div class="btn">
+  <button class="quikShopBtn">Quick Shop</button>
+</div>
+
+<div class="popup-view">
+  <div id="popup-card">
+    <a><i class="fas fa-times close-btn"></i></a>
+    <div class="product-img">
+      <img src="" alt="" id="image-product">
+    </div>
+    <div class="info">
+      <h2 class="product-title"></h2>
+      <p class="product-price"></p>
+      <div class="variants-choose"></div>
+
+      <input type="text" name="variantId" class="selectProductVariants" hidden value="">
+
+      <div class="input-data">
+        {% render 'quantity' %}
+        <div class="btnWishList"></div>
+      </div>
+
+      <button class="addToCart">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<style>
+      .wishlist-added {
+        color: red;
+
+    }
+    .addtoWishlist
+    {
+       cursor: pointer;
+  }
+
+  #product-card
+  {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+    .variants-choose{
+    padding-bottom: 10px;
+  }
+  .product-variants {
+    font-weight: bold;
+    color: White;
+  }
+  .product-select-variants1{
+      font-weight: bold;
+    color: White;
+  }
+    #first-variant{
+      border: 2 px solid black;
+
+     border-radius: 15px;
+      width: 30%;
+  }
+
+      .activevariants{
+         background-color:aqua;
+      }
+      .input-data{
+        display: inline-flex;
+      }
+      .btnWishList{
+        padding: 12px;
+        padding-left:20px;
+      }
+         .variants-btn{
+           margin:5px;
+           padding: 5px;
+         }
+
+           .popup-view {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                justify-content: center;
+                align-items: center;
+              }
+
+              .product-popup {
+                background: #fff;
+                padding: 20px;
+                max-width: 400px;
+                text-align: center;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              }
+
+              .product-title {
+                font-size: 1.5em;
+                /* margin-bottom: 5px; */
+              }
+
+              .product-price {
+                font-size: 1.1em;
+                color: #333;
+                margin-bottom: 15px;
+              }
+
+              #image-product {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 15px;
+              }
+
+              .close-btn {
+                background: #333;
+                color: #fff;
+                padding: 10px 15px;
+                cursor: pointer;
+                border: none;
+                font-size: 1em;
+              }
+
+
+                  /* .container{
+                    position: relative;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100vh;
+                  } */
+
+                  /*Styles for popup view*/
+
+                   .popup-view{
+                    z-index: 999;
+                    background: LightSteelBlue;
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: 0.5s;
+                  }
+
+                   .popup-view.active{
+                    opacity: 1;
+                    visibility: visible;
+                  }
+
+                   #popup-card{
+                    position: relative;
+                    display: flex;
+                    width: 800px;
+                    height: 550px;
+                    margin: 20px;
+                  }
+
+                   #popup-card .product-img{
+                    z-index: 2;
+                    background: white;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 45%;
+                    height: 90%;
+                    transform: translateY(25px);
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                  }
+
+                   #popup-card .product-img #image-product{
+                    z-index: 999;
+                    position: relative;
+                    width: 500px;
+                    /* left: -50px; */
+                  }
+
+                   #popup-card .info{
+                    z-index: 2;
+                    background: LightSlateGray;
+                    display: flex;
+                    flex-direction: column;
+                    width: 55%;
+                    height: 100%;
+                    box-sizing: border-box;
+                    padding: 20px;
+                    border-radius: 10px;
+                  }
+
+                   #popup-card .close-btn{
+                    color: #fff;
+                    z-index: 3;
+                    position: absolute;
+                    right: 0;
+                    font-size: 20px;
+                    margin: 5px;
+                  }
+
+                   #popup-card .info h2{
+                    font-size: 40px;
+                    /* line-height: 20px; */
+                    /* margin: 1px; */
+                  }
+
+
+                   #popup-card .info p{
+                    font-size: 15px;
+                    margin: 10px;
+                  }
+
+                   #popup-card .info .product-price{
+                    font-size: 25px;
+                    font-weight: 300;
+                    margin: 10px;
+                  }
+
+                   #popup-card .info .addToCart{
+                    /* color: #fff; */
+                    /* background: #009DD2; */
+                    font-size: 16px;
+                    font-weight: 600;
+                    text-align: center;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    margin: 10px auto;
+                    padding: 10px 50px;
+                    border-radius: 20px;
+                  }
+
+                  /*Responsive styles*/
+
+                  @media (max-width: 900px){
+                     #popup-card{
+                      flex-direction: column;
+                      width: 550px;
+                      height: auto;
+                    }
+
+                     #popup-card .product-img{
+                      z-index: 3;
+                      width: 100%;
+                      height: 200px;
+                      transform: translateY(0);
+                      border-bottom-left-radius: 0;
+                      border-top-left-radius: 10px;
+                      border-top-right-radius: 10px;
+                    }
+
+                     #popup-card .product-img img{
+                      left: initial;
+                      max-width: 100%;
+                    }
+
+                     #popup-card .info{
+                      width: 100%;
+                      height: auto;
+                      padding: 20px;
+                      border-top-left-radius: 0;
+                      border-top-right-radius: 0;
+                    }
+
+                     #popup-card .info h2{
+                      margin: 20px 5px 5px 5px;
+                      font-size: 25px;
+                    }
+
+                     #popup-card .info h2 span{
+                      font-size: 10px;
+                    }
+
+                     #popup-card .info p{
+                      margin: 5px;
+                      font-size: 13px;
+                    }
+
+                     #popup-card .info .product-price{
+                      margin: 5px;
+                      font-size: 30px;
+                    }
+
+
+                     #popup-card .close-btn{
+                      z-index: 4;
+                    }
+                  } */
+</style>
+<style>
+  .quikShopBtn {
+           background-color: green;
+           border-radius: 30px;
+           border: none;
+           color: white;
+           text-align: center;
+           padding: 10px;
+           cursor: pointer;
+           font-size: 15px;
+       }
+</style>

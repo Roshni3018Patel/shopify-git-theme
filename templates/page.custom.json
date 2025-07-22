@@ -1,0 +1,128 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "custom_product_3H4Myx": {
+      "type": "custom-product",
+      "blocks": {
+        "product_LFi4Hw": {
+          "type": "product",
+          "settings": {
+            "product": "shirt"
+          }
+        },
+        "product_Pcc368": {
+          "type": "product",
+          "settings": {
+            "product": "t-shirt"
+          }
+        },
+        "product_JyTBJC": {
+          "type": "product",
+          "settings": {
+            "product": "ring"
+          }
+        }
+      },
+      "block_order": [
+        "product_LFi4Hw",
+        "product_Pcc368",
+        "product_JyTBJC"
+      ],
+      "settings": {
+        "title": "Products",
+        "product": "powder-snowboard"
+      }
+    },
+    "custom_collection_RTp6AX": {
+      "type": "custom-collection",
+      "blocks": {
+        "collection_GTE8t4": {
+          "type": "collection",
+          "settings": {
+            "collection": "hydrogen"
+          }
+        },
+        "collection_gweFEf": {
+          "type": "collection",
+          "settings": {
+            "collection": "automated-collection"
+          }
+        }
+      },
+      "block_order": [
+        "collection_GTE8t4",
+        "collection_gweFEf"
+      ],
+      "settings": {
+        "title": "Products in",
+        "collection": "hydrogen",
+        "collection_list": [
+          "womens-wear",
+          "mens-wear",
+          "jewellery",
+          "hydrogen"
+        ],
+        "heading": "Collection List"
+      }
+    },
+    "product_list_UrUXwC": {
+      "type": "product-list",
+      "settings": {
+        "title": "Products List",
+        "product_list": [
+          "powder-snowboard",
+          "t-shirt",
+          "the-compare-at-price-snowboard",
+          "the-3p-fulfilled-snowboard",
+          "shirt",
+          "ring",
+          "the-collection-snowboard-hydrogen",
+          "the-collection-snowboard-liquid",
+          "the-multi-managed-snowboard",
+          "the-multi-location-snowboard",
+          "the-inventory-not-tracked-snowboard"
+        ]
+      }
+    },
+    "custom_h4Etjz": {
+      "type": "custom",
+      "settings": {}
+    },
+    "collection_list_paginate_LXDijR": {
+      "type": "collection-list-paginate",
+      "settings": {
+        "title": "Products in",
+        "collection_list": [
+          "hydrogen",
+          "automated-collection",
+          "womens-wear",
+          "jewellery"
+        ],
+        "heading": "Collection List"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_product_3H4Myx",
+    "custom_collection_RTp6AX",
+    "product_list_UrUXwC",
+    "custom_h4Etjz",
+    "collection_list_paginate_LXDijR"
+  ]
+}

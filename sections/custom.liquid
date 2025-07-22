@@ -1,0 +1,99 @@
+{% assign name = 'Roshni' %}
+{% assign age = 20 %}
+
+{% capture result %}
+  {% assign oldage = 15 %}
+  <div style=" text-align: center; border:2px solid lightgray"> Capture variable : My Name is {{ name }} and my age is  {{ age }} and my old age is  {{ oldage }}</div>
+{% endcapture %}
+{{ result }}
+<br>
+
+<div style=" text-align: center;">
+  <h2>Arithmetic Operators</h2>
+  {%- assign number1 = 60 -%}
+  {%- assign number2 = 20 -%}
+  <p>Sum of Numbers is {{ number1 | plus: number2 }}</p>
+  <p>Subtract of Numbers is {{ number1 | minus: number2 }}</p>
+  <p>multiply of Numbers is {{ number1 | times: number2 }}</p>
+  <p>Division of Numbers is {{ number1 | divided_by: number2 }}</p>
+  <p>Modulus of Numbers is {{ number1 | modulo: number2 }}</p>
+  <!--
+    <p>Round of 3.4 is {{ 3.4 | round }}</p>
+    <p>Floor of 4.2 is {{ 4.2 | floor }}</p>
+    <p>Ceil of Numbers is {{ 1.2 | ceil }}</p>
+    <p>At most value of 4 at_most 5 is {{ 4 | at_most: 5 }}</p>
+    <p>At most value of 4 at_most 5 is {{ 6 | at_most: 5 }}</p>
+    <p>At least value of 4 at_least 5 is {{ 4 | at_least: 5 }}</p>
+    <p>At least value of 4 at_least 3 is {{ 4 | at_least: 3 }}</p>
+  -->
+  <!-- <p>Absolute value of -3 is {{ -3 | abs }}</p> -->
+  <!--
+    {{ 'coming_soon' | camelcase }}
+    {{ '<p>test</p>' | escape }}
+    {% capture var %}
+      One
+      Two
+      Three
+      {% endcapture %}
+    {{ var | newline_to_br }}
+  -->
+</div>
+
+{% for block in section.blocks %}
+  <h2>{{ block.settings.heading }}</h2>
+
+  {% if block.settings.heading contains 'C' %}
+    This potion contains restorative properties.
+  {% endif %}
+
+  <div
+    style=" display:flex; justify-content: center; text-align: center; background-color:rgba(0, 128, 0, 0.1);"
+  >
+    {% for collection in collections %}
+      {% if block.settings.collection.title == collection.title %}
+        <a href="{{ collection.url }}" id="{{ section.id }}" class="collections">
+          {{- block.settings.collection.title -}}
+          <br>
+          {{ block.settings.collection.image | img_url: 'large' | img_tag }}
+          <br>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Custom-Data",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "richtext",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading"
+        }
+      ]
+    },
+       {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection-list"
+        }
+      ]
+    }
+  ],
+   "presets": [
+  {
+    "name":"Custom-Data"
+  }
+]
+}
+{% endschema %}

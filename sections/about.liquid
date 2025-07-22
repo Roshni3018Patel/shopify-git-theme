@@ -1,0 +1,77 @@
+<h3>{{ section.settings.title }}</h3>
+
+<p>{{ section.settings.column_richtext }}</p>
+
+<a href="{{ section.settings.collection}}"></a>
+
+{{ section.settings.collection | products }}
+
+{% for product in collections['sale-potions'].products %}
+  {{- product.title | link_to: product.url }}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Produt-collection",
+  "class": "index-section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+       "type": "richtext",
+       "id": "column_richtext",
+       "label": "Short Description",
+       "default": "<p></p>"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Chose a collection"
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": "Collections per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection2",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection2",
+          "label": "Collection 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produt-collection",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

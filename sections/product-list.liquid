@@ -1,0 +1,47 @@
+{{ 'section-custom-product-list.css' | asset_url | stylesheet_tag }}
+
+<h1>{{ section.settings.title }}</h1>
+
+<div class="product-container">
+  <div class="product-list-container">
+    {% for product in section.settings.product_list %}
+      <div
+        class="product-card"
+        data-product-id="{{ product.id }}"
+        data-product-handle="{{ product.handle }}"
+        id="products"
+      >
+        <a href="{{ product.url }}" id="{{ section.id }}" class="products">
+          {{ product.images[0] | img_url: 'medium' | img_tag }}
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-price">{{ product.price | money }}</p>
+        </a>
+        {% render 'wishlist' %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "product-list",
+  "settings": [
+      {
+    "type": "inline_richtext",
+    "id": "title",
+    "default": "Products List",
+    "label": "Heading"
+  },
+      {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Product List"
+    }
+  ],
+  "presets": [
+    {
+    "name": "product-list"
+    }
+  ]
+}
+{% endschema %}

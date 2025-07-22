@@ -1,0 +1,410 @@
+<div id="promotion-popup-spinner"  class="promotion-popup-spinner" style="display: none;">
+    <div id="popup-content-spinner">
+      <button class="btn-close-spinner">X</button>
+      
+      {% capture spinnervalues %}
+        {% for block in section.blocks %}
+          {% assign spinnertext = block.settings.spinnerTexts %}
+          {{ spinnertext }}|
+        {% endfor %}
+      {% endcapture %}
+      
+        {% capture spinnerDiscountValue %}
+        {% for block in section.blocks %}
+          {% assign spinnerDiscount = block.settings.discountCode %}
+          {{ spinnerDiscount }}|
+        {% endfor %}
+      {% endcapture %}
+
+      <div class="wrapper"> 
+        <div class="container">
+          <canvas id="wheel"></canvas>
+          <button id="spin-btn">Spin</button>
+          <img src="https://cdn-icons-png.flaticon.com/512/2099/2099190.png" alt="spinner-arrow">
+        </div>
+        <div id="final-value">
+          <p>Click On The Spin Button To Start</p>
+        </div>
+           <div class="copy-button">
+          <input id="copyvalue" type="text" readonly value="" />
+          <button onclick="copyIt()" class="copybtn">COPY</button>
+        </div>
+      </div>
+      <a href="/collections/all" class="btn-shop-now-spinner">Shop Now</a>
+      <button id="btn-no-thanks-spinner">No Thanks</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"
+  ></script>
+
+
+  <script>
+  const wheel = document.getElementById("wheel");
+const spinBtn = document.getElementById("spin-btn");
+const finalValue = document.getElementById("final-value");
+      $('.copy-button').hide();
+    var dataValue = `{{ spinnervalues }}`;
+    var spinnerValues = dataValue.trim().split('|').filter(value => value);
+const rotationValues = [
+  { minDegree: 0, maxDegree: 30, value: 2 },
+  { minDegree: 31, maxDegree: 90, value: 1 },
+  { minDegree: 91, maxDegree: 150, value: 6 },
+  { minDegree: 151, maxDegree: 210, value: 5 },
+  { minDegree: 211, maxDegree: 270, value: 4 },
+  { minDegree: 271, maxDegree: 330, value: 3 },
+  { minDegree: 331, maxDegree: 360, value: 2 },
+];
+const data = [16, 16, 16, 16, 16, 16];
+const pieColors = ["#8b35bc", "#b163da", "#8b35bc", "#b163da", "#8b35bc", "#b163da"];
+let myChart = new Chart(wheel, {
+  plugins: [ChartDataLabels],
+  type: "pie",
+  data: {
+    labels: spinnerValues,
+    datasets: [
+      {
+        backgroundColor: pieColors,
+        data: data,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    animation: { duration: 0 },
+    plugins: {
+      tooltip: false,
+      legend: {
+        display: false,
+      },
+      datalabels: {
+        color: "#ffffff",
+        formatter: (_, context) => context.chart.data.labels[context.dataIndex],
+        font: { size: 12 },
+      },
+    },
+  },
+});
+
+     var dataValue = `{{ spinnerDiscountValue }}`;
+    var spinnerValuesDis = dataValue.trim().split('|').filter(value => value);
+    const valueGenerator = (angleValue) => {
+  for (let i of rotationValues) {
+    if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+      const selectedValueIndex = i.value - 1;
+      const selectedValue = spinnerValues[selectedValueIndex];
+      const selectedDiscount = spinnerValuesDis[selectedValueIndex]; 
+      finalValue.innerHTML = `<p>Congratulations: ${selectedValue}</p>`;
+      $('#copyvalue').val(selectedDiscount);
+      $('.copy-button').show();
+      spinBtn.disabled = false;
+      break;
+    }
+  }
+};
+
+
+let count = 0;
+let resultValue = 101;
+spinBtn.addEventListener("click", () => {
+  spinBtn.disabled = true;
+     $('#btn-no-thanks-spinner').hide();
+  finalValue.innerHTML = `<p>Good Luck!</p>`;
+  let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+  let rotationInterval = window.setInterval(() => {
+    myChart.options.rotation = myChart.options.rotation + resultValue;
+    myChart.update();
+    if (myChart.options.rotation >= 360) {
+      count += 1;
+      resultValue -= 5;
+      myChart.options.rotation = 0;
+    } else if (count > 15 && myChart.options.rotation == randomDegree) {
+      valueGenerator(randomDegree);
+      clearInterval(rotationInterval);
+      count = 0;
+      resultValue = 101;
+    }
+  }, 10);
+});
+
+let copybtn = document.querySelector(".copybtn");
+function copyIt(){
+  let copyInput = document.querySelector('#copyvalue');
+  copyInput.select();
+  document.execCommand("copy");
+  copybtn.textContent = "COPIED";
+}
+    $(document).ready(function() {
+      function displayPopup() {
+        if (!getCookie('spinnerDisMissed')) {
+          $('#promotion-popup-spinner').show();
+        } else {
+          var expirationDate = getCookieExpiration('spinnerDisMissed');
+          var currentDate = new Date();
+          if (expirationDate && expirationDate > currentDate) {
+            $('#promotion-popup-spinner').show();
+          }
+        }
+      }
+      function updateClock() {
+        var now = new Date();
+        var targetDate = new Date('{{ section.settings.date }}');
+        var timeDifference = targetDate.getTime() - now.getTime();
+
+        var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        $('#days-value').text(days);
+        $('#hours-value').text(hours);
+        $('#minutes-value').text(minutes);
+        $('#seconds-value').text(seconds);
+
+        setTimeout(updateClock, 1000);
+      }
+      updateClock();
+      $('.btn-close-spinner').click(function(){
+            $('#promotion-popup-spinner').hide();
+        setCookie('spinnerDisMissed', 'true', 1);
+      });
+
+      $('#btn-no-thanks-spinner').click(function() {
+        $('#promotion-popup-spinner').hide();
+        setCookie('spinnerDisMissed', 'true', 1);
+      });
+
+      function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+      }
+
+      function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+      }
+
+      function getCookieExpiration(cookieName) {
+        var cookieValue = getCookie(cookieName);
+        if (cookieValue) {
+          var cookieParts = cookieValue.split('|');
+          if (cookieParts.length === 2) {
+            var expirationTime = parseInt(cookieParts[1]);
+            return new Date(expirationTime);
+          }
+        }
+        return null;
+      }
+
+    
+      displayPopup();
+    });
+  </script>
+
+  {% schema %}
+  {
+    "name": "Spinner Wheel",
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "title",
+        "default": "Offer",
+        "label": "Heading"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "Description",
+        "default": "Get 10% off when you purchase in the next 24 hours",
+        "label": "Discount Description"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "Spinner",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "spinnerTexts",
+            "label": "Spinner Text"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "discountCode",
+            "label": "Discount Code"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Spinner Wheel"
+      }
+    ]
+  }
+  {% endschema %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+  <style>
+    .btn-shop-now-spinner, #btn-no-thanks-spinner {
+    display: inline-block;
+    padding: 10px;
+    background-color: #007bff;
+    margin-top: 30px;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+    #btn-no-thanks-spinner {
+    margin-left: 10px;
+    background-color: #ccc;
+}
+    #promotion-popup-spinner {
+    position: fixed;
+     top: 55%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px #0000001a;
+    z-index: 9999;
+    height: 758px;
+    width: 900px;
+}
+
+   #popup-content-spinner{
+    text-align: center;
+    } 
+    
+    button.btn-close-spinner {
+    float: right;
+    width: 35px;
+    height: 30px;
+    color: white;
+    background-color: red;
+} * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #c3a3f1, #6414e9);
+}
+.wrapper {
+      width: 83%;
+    max-width: 32.37em;
+    max-height: 90vh;
+    background-color: #ffffff;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 58%;
+  left: 50%;
+  padding: 3em;
+  border-radius: 1em;
+  box-shadow: 0 4em 5em rgba(27, 8, 53, 0.2);
+}
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#wheel {
+  max-height: inherit;
+  width: inherit;
+  top: 0;
+  padding: 0;
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#spin-btn {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  height: 26%;
+  width: 26%;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+  background: radial-gradient(#fdcf3b 50%, #d88a40 85%);
+  color: #c66e16;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+img {
+     position: absolute;
+    width: 4em;
+    top: 33%;
+    right: -6%;
+}
+#final-value {
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 1.5em;
+  color: #202020;
+  font-weight: 500;
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    font-size: 12px;
+  }
+  img {
+    right: -5%;
+  }
+}
+.main,
+.copy-button {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  align-items: center;
+}
+    .copy-button {
+  margin: 12px 0 -5px 0;
+  height: 45px;
+  border-radius: 4px;
+  padding: 0 5px;
+  border: 1px solid #e1e1e1;
+}
+.copy-button input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+.copy-button button {
+  padding: 5px 20px;
+  background-color: #dc143c;
+  color: #fff;
+  border: 1px solid transparent;
+}
+  </style>
+
+

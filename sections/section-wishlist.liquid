@@ -1,0 +1,180 @@
+<h1>{{ section.settings.heading }}</h1>
+
+<div class="wishlist-products" data-product-handle="{{ product.handle }}"></div>
+
+{% schema %}
+{
+  "name": "Wishlist",
+  "settings": [
+    {
+    "type": "inline_richtext",
+    "id": "title",
+    "default": "Products in  ",
+    "label": "Heading"
+  },
+        {
+    "type": "inline_richtext",
+    "id": "heading",
+    "default": "My Wishlist",
+    "label": "Heading"
+  },
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "Collections"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wishlist"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+    .wishlistAddToCart{
+       /* color: #fff; */
+       /* background: #009DD2; */
+       font-size: 16px;
+       font-weight: 500;
+       text-align: center;
+       text-decoration: none;
+       text-transform: uppercase;
+       margin: 5px auto;
+        padding: 5px 30px;
+        border-radius: 20px;
+    }
+
+  select {
+    width: 200px;
+    height: 30px;
+    line-height: 50px;
+
+  }
+
+    .wishlist-products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+    }
+     .product-card {
+          margin-bottom: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 60px;
+          margin: 20px;
+          box-sizing: border-box;
+        }
+    .remove-from-wishlist {
+        color: red;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+{% endstylesheet %}
+
+{% comment %}
+  <h2>{{ 'Collection List' }}</h2>
+  <div class="collection-list">
+    {% for collection in section.settings.collection_list %}
+      {% paginate collection.products by section.settings.products_per_page %}
+        <div class="product-list" data-collection-id="{{ collection.id }}" data-next-url="{{ paginate.next.url }}">
+          {% for collection_product in collection.products %}
+            <div class="product-block" data-product-id="{{ collection_product.id }}">
+              {{ collection_product.featured_image | img_url: 'medium' | img_tag }}
+              <div class="product-title">{{ collection_product.title }}</div>
+              <div class="product-price">{{ collection_product.price | money_without_trailing_zeros }}</div>
+              <select class="variant-dropdown">
+                {% for variant in collection_product.variants %}
+                  <option value="{{ variant.id }}" data-variant-title="{{ variant.title }}" data-price="{{ variant.price | money_without_trailing_zeros }}">
+                    {{ variant.title }}
+                  </option>
+                {% endfor %}
+              </select>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endpaginate %}
+    {% endfor %}
+    <button class="load-more-btn">Load more</button>
+    <div class="load-more-spinner" style="display: none;"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function(){
+      const loadMoreBtn = $('.load-more-btn');
+      const loadMoreSpinner = $('.load-more-spinner');
+
+      loadMoreBtn.click(function(e){
+        e.preventDefault();
+        loadMoreBtn.hide();
+        loadMoreSpinner.show();
+
+        $('.product-list').each(function() {
+          const currentProductList = $(this);
+          const collectionId = currentProductList.attr('data-collection-id');
+          const nextPageUrl = currentProductList.attr('data-next-url');
+
+          if (nextPageUrl) {
+            $.ajax({
+              url: nextPageUrl,
+              type: "GET",
+              dataType: "html",
+              success: function(nextPage){
+                const newProducts = $(nextPage).find('.product-list[data-collection-id="'+collectionId+'"]');
+                currentProductList.append(newProducts.html());
+                currentProductList.attr('data-next-url', newProducts.attr('data-next-url'));
+
+                if (newProducts.attr('data-next-url')) loadMoreBtn.show();
+                loadMoreSpinner.hide();
+              },
+              complete: function() {
+                loadMoreSpinner.hide();
+              }
+            });
+          } else {
+            loadMoreSpinner.hide();
+          }
+        });
+      });
+
+      $('.variant-dropdown').change(function(){
+        var selectedVariant = $(this).find(':selected');
+        var productId = selectedVariant.closest('.product-block').data('product-id');
+        var productBlock = $('.product-block[data-product-id="'+productId+'"]');
+
+        var selectedPrice = selectedVariant.data('price');
+        productBlock.find('.product-price').text(selectedPrice);
+      });
+
+      $('.add-to-cart-btn').click(function(){
+        var variantId = $(this).parent('.product-block').find('.variant-dropdown option:selected').val();
+        addToCartShopify(variantId, 1);
+      });
+
+      function addToCartShopify(variantId, quantity) {
+        var cartUrl = '/cart/add.js';
+        var data = {
+          quantity: quantity,
+          id: variantId
+        };
+
+        $.ajax({
+          url: cartUrl,
+          type: 'POST',
+          dataType: 'json',
+          data: data,
+          success: function(response) {
+            window.location.href = '/cart';
+          },
+          error: function(error) {
+            console.error('Error adding item to cart:', error);
+          }
+        });
+      }
+    });
+  </script>
+{% endcomment %}

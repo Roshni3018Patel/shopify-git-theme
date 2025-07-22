@@ -1,0 +1,81 @@
+{{ 'section-custom-product-list.css' | asset_url | stylesheet_tag }}
+
+<h1>{{ section.settings.title }}</h1>
+
+<div class="product-list-container">
+  {%- if section.settings.product != blank -%}
+    {% assign product = all_products[section.settings.product] %}
+    <div
+      class="product-card"
+      data-product-id="{{ product.id }}"
+      data-product-handle="{{ product.handle }}"
+      id="products"
+    >
+      <a href="{{ product.url }}" id="{{ product.id }}" class="Products">
+        {{ product.images[0] | img_url: 'medium' | img_tag }}
+        <h3 class="product-title">{{ product.title }}</h3>
+        <p class="product-price">{{ product.price | money }}</p>
+      </a>
+      {% render 'wishlist' %}
+    </div>
+  {%- endif -%}
+</div>
+
+{%- for block in section.blocks -%}
+  <div class="product-list-container">
+    {%- if block.settings.product != blank -%}
+      {% assign product = all_products[block.settings.product] %}
+      <div
+        class="product-card"
+        data-product-id="{{ product.id }}"
+        data-product-handle="{{ product.handle }}"
+        id="products"
+      >
+        <a href="{{ product.url }}" id="{{ section.id }}" class="Products">
+          {{ product.featured_image | img_url: 'medium' | img_tag }}
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-price">{{ product.price | money }}</p>
+        </a>
+        {% render 'wishlist' %}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Custom-Product",
+  "settings": [
+     {
+    "type": "inline_richtext",
+    "id": "title",
+    "default": "Products",
+    "label": "Heading"
+  },
+     {
+    "type": "product",
+    "id": "product",
+    "label": "Select Product"
+  }
+
+  ],
+  "blocks":[
+     {
+      "type": "product",
+      "name": "product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product list"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom-Product"
+    }
+  ]
+}
+{% endschema %}

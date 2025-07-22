@@ -1,0 +1,52 @@
+
+{% schema %}
+{
+  "name": "Collection slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+   {
+         "type": "image_picker",
+         "id": "image",
+         "label": "Select Image"
+   }
+  ],
+  "blocks": [
+    {
+     "type": "block",
+     "name": "Column",
+     "settings": [
+       {
+         "type": "product",
+         "id": "product",
+         "label": "Select Product"
+       },
+       {
+          "type": "range",
+          "id": "horizontal_position",
+          "label": "Set Position Horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50
+       },
+       {
+          "type": "range",
+          "id": "vertical_position",
+          "label": "Set Position Vertical",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50
+       }
+     ]
+   }
+  ],
+  "presets": [
+    {
+      "name": "Collection slider"
+    }
+  ]
+}
+{% endschema %}
+

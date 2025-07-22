@@ -1,0 +1,554 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "page.about.json",
+  "context": {
+    "market": "in"
+  },
+  "sections": {
+    "rich_text_J4tFYb": {
+      "type": "rich-text",
+      "disabled": false,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "header-d56ef88930ffaaf926dfba0efcbb9262": null,
+        "padding_top": 40,
+        "padding_bottom": 52
+      },
+      "blocks": {
+        "heading_4yAz6N": {
+          "type": "heading",
+          "disabled": false,
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_AUQMwp": {
+          "type": "text",
+          "disabled": false,
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_j3aGEQ": {
+          "type": "button",
+          "disabled": false,
+          "settings": {
+            "button_label": "Show products",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "show Collections",
+            "button_link_2": "shopify://collections",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_4yAz6N",
+        "text_AUQMwp",
+        "button_j3aGEQ"
+      ]
+    },
+    "featured_collection_kcNJi7": {
+      "type": "featured-collection",
+      "disabled": false,
+      "settings": {
+        "title": "Featured collection",
+        "heading_size": "h1",
+        "description": "<p>All products available here!! </p>",
+        "show_description": false,
+        "description_style": "subtitle",
+        "collection": "automated-collection",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-1",
+        "header-02bc6e4b09d0cbb893961f18ac337c0f": null,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "header-25bbc0d3aaa0bab89d7f69d15e56ad7d": null,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "header-8fdc363ad98cf6a12ade4298169ec9ea": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "multirow_nPVCC8": {
+      "type": "multirow",
+      "disabled": false,
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "background-1",
+        "row_color_scheme": "background-1",
+        "header-d4b447068429106ae63ab6c3104fd658": null,
+        "mobile_content_alignment": "left",
+        "header-b0c84dd7ab7cad2fdf06ef9018453725": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "row_Gwjtwa": {
+          "type": "row",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/istockphoto-1281083606-170667a.webp",
+            "caption": "women's",
+            "heading": "Shirt",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Buy now",
+            "button_link": "shopify://products/shirt"
+          }
+        },
+        "row_PDNbcr": {
+          "type": "row",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/image2_8407f938-e753-4092-a40f-f7b3fc18ad4a.jpg",
+            "caption": "Men's",
+            "heading": "T-shirt",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Buy now",
+            "button_link": "shopify://products/t-shirt"
+          }
+        }
+      },
+      "block_order": [
+        "row_Gwjtwa",
+        "row_PDNbcr"
+      ]
+    },
+    "image_with_text_mmfgmj": {
+      "type": "image-with-text",
+      "disabled": false,
+      "settings": {
+        "image": "shopify://shop_images/best-places-to-shop-for-summer-dresses-online.webp",
+        "height": "small",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "accent-2",
+        "header-eb89ff2ca31e0c514fdb8ebc3f3b7c39": null,
+        "image_behavior": "none",
+        "header-7d26dec2c04b31b7ee62359d267a23c2": null,
+        "mobile_content_alignment": "left",
+        "header-98f4fa7febc925a9ede75d2038187e65": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "heading_eA9AGt": {
+          "type": "heading",
+          "disabled": false,
+          "settings": {
+            "heading": "Summer Collections",
+            "heading_size": "h1"
+          }
+        },
+        "text_4mRDhE": {
+          "type": "text",
+          "disabled": false,
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_edbTgE": {
+          "type": "button",
+          "disabled": false,
+          "settings": {
+            "button_label": "Show Products",
+            "button_link": "shopify://collections/womens-wear"
+          }
+        }
+      },
+      "block_order": [
+        "heading_eA9AGt",
+        "text_4mRDhE",
+        "button_edbTgE"
+      ]
+    },
+    "multicolumn_rmacBw": {
+      "type": "multicolumn",
+      "disabled": false,
+      "settings": {
+        "title": "Products",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "button_label": "Show all products",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "background-1",
+        "header-cd30880dbf7566462b0c5dd5daf9804f": null,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "header-72dae076013f8f597b5b9c8176847eac": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "column_pFRRpP": {
+          "type": "column",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/jones-storm-chaser-powder-snowboard.jpg",
+            "title": "power snowboard",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "More details",
+            "link": "shopify://products/powder-snowboard"
+          }
+        },
+        "column_GXwaRz": {
+          "type": "column",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg",
+            "title": "automated snowboard",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "More details",
+            "link": "shopify://products/the-multi-location-snowboard"
+          }
+        },
+        "column_Nx6G6n": {
+          "type": "column",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/snowboard_sky.png",
+            "title": "Multimanaged snowboard",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "More details",
+            "link": "shopify://products/the-multi-managed-snowboard"
+          }
+        }
+      },
+      "block_order": [
+        "column_pFRRpP",
+        "column_GXwaRz",
+        "column_Nx6G6n"
+      ]
+    },
+    "collapsible_content_gf36zy": {
+      "type": "collapsible-content",
+      "disabled": false,
+      "settings": {
+        "caption": "",
+        "heading": "Important details",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "background-1",
+        "container_color_scheme": "background-2",
+        "open_first_collapsible_row": false,
+        "header-19e4094a9eee232bbf3b1164f0c02fc7": null,
+        "image": null,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "header-8d570cbcee6c4a6456de22da1da601f1": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "collapsible_row_EeCedQ": {
+          "type": "collapsible_row",
+          "disabled": false,
+          "settings": {
+            "heading": "All category products is available",
+            "icon": "dairy",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_XWGxaK": {
+          "type": "collapsible_row",
+          "disabled": false,
+          "settings": {
+            "heading": "Return policy available",
+            "icon": "return",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_7jqJQ3": {
+          "type": "collapsible_row",
+          "disabled": false,
+          "settings": {
+            "heading": "Early deliver",
+            "icon": "truck",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_6k4pkx": {
+          "type": "collapsible_row",
+          "disabled": false,
+          "settings": {
+            "heading": "Any questions please click here!",
+            "icon": "question_mark",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_EeCedQ",
+        "collapsible_row_XWGxaK",
+        "collapsible_row_7jqJQ3",
+        "collapsible_row_6k4pkx"
+      ]
+    },
+    "contact_form_zcRBxd": {
+      "type": "contact-form",
+      "disabled": false,
+      "settings": {
+        "heading": "Contact us",
+        "heading_size": "h1",
+        "color_scheme": "background-1",
+        "header-18711f29af5589958b53863ed1f23bf2": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "image_banner_FMJWAC": {
+      "type": "image-banner",
+      "disabled": false,
+      "settings": {
+        "image": "shopify://shop_images/over-55-of-small-town-residents-preferred-online-shopping-for-gifts-clothing-and-footwear-survey.gif",
+        "image_2": null,
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "header-2c2c00a9493ac7e61aca71ce2b55f18b": null,
+        "image_behavior": "none",
+        "header-4cfdd11a29ec5d963fd24611befbdf90": null,
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      },
+      "blocks": {
+        "heading_y8TK7K": {
+          "type": "heading",
+          "disabled": false,
+          "settings": {
+            "heading": "Online Shopping",
+            "heading_size": "h1"
+          }
+        },
+        "text_k9kJ3W": {
+          "type": "text",
+          "disabled": false,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_bdVtp8": {
+          "type": "buttons",
+          "disabled": false,
+          "settings": {
+            "button_label_1": "show Collection",
+            "button_link_1": "shopify://collections",
+            "button_style_secondary_1": false,
+            "button_label_2": "show All products",
+            "button_link_2": "shopify://collections/all",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_y8TK7K",
+        "text_k9kJ3W",
+        "buttons_bdVtp8"
+      ]
+    },
+    "slideshow_CrycFM": {
+      "type": "slideshow",
+      "disabled": false,
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "header-32ab1eb46c2ab1820707e714391b60be": null,
+        "image_behavior": "none",
+        "header-76c85b63d8726ac08b45be742f95854a": null,
+        "show_text_below": true,
+        "header-b45e6b81331fa90826f1f8fd07920c8a": null,
+        "accessibility_info": "Slideshow about our brand"
+      },
+      "blocks": {
+        "slide_Yd4fhQ": {
+          "type": "slide",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/silver-lamp-on-a-white-table-next-to-books.jpg",
+            "heading": "My Store",
+            "heading_size": "h1",
+            "subheading": "Our store is helped to easly and time consumed and make you free so start online shopping now !!",
+            "button_label": "More details",
+            "link": "shopify://collections",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "header-94d5af39d73e9d03c9114085796c73dc": null,
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "slide_Yd4fhQ"
+      ]
+    },
+    "collage_7xe9RN": {
+      "type": "collage",
+      "disabled": false,
+      "settings": {
+        "heading": "Multimedia collage",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "background-1",
+        "header-541253513aff7bb895a5c3f79438bb7d": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "image_a4QgYj": {
+          "type": "image",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/minimalist-retail-clothing-display.jpg"
+          }
+        },
+        "product_brjwD9": {
+          "type": "product",
+          "disabled": false,
+          "settings": {
+            "product": "shirt",
+            "second_image": false
+          }
+        },
+        "collection_VLxJgf": {
+          "type": "collection",
+          "disabled": false,
+          "settings": {
+            "collection": "womens-wear"
+          }
+        }
+      },
+      "block_order": [
+        "image_a4QgYj",
+        "product_brjwD9",
+        "collection_VLxJgf"
+      ]
+    },
+    "main": {
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {}
+    },
+    "collection_list_dgiLFE": {
+      "type": "collection-list",
+      "disabled": false,
+      "settings": {
+        "title": "Collections",
+        "subTitle": "Collections here!",
+        "heading_size": "h1",
+        "image_ratio": "portrait",
+        "columns_desktop": 3,
+        "color_scheme": "background-1",
+        "show_view_all": false,
+        "header-52ed6ba43d6836d04b9fb9582b787514": null,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "header-dcb30e0e4b4d2e940f88acb512e62c85": null,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "featured_collection_xMrnPi": {
+          "type": "featured_collection",
+          "disabled": false,
+          "settings": {
+            "collection": "womens-wear"
+          }
+        },
+        "featured_collection_eLYbrM": {
+          "type": "featured_collection",
+          "disabled": false,
+          "settings": {
+            "collection": "mens-wear"
+          }
+        },
+        "featured_collection_aWQAPz": {
+          "type": "featured_collection",
+          "disabled": false,
+          "settings": {
+            "collection": "jewellery"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_xMrnPi",
+        "featured_collection_eLYbrM",
+        "featured_collection_aWQAPz"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_mmfgmj",
+    "collage_7xe9RN",
+    "featured_collection_kcNJi7",
+    "multirow_nPVCC8",
+    "multicolumn_rmacBw",
+    "image_banner_FMJWAC",
+    "slideshow_CrycFM",
+    "collection_list_dgiLFE",
+    "rich_text_J4tFYb",
+    "contact_form_zcRBxd",
+    "collapsible_content_gf36zy"
+  ]
+}

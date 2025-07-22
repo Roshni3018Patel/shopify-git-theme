@@ -1,0 +1,174 @@
+<h1 id="title">{{ section.settings.title }}</h1>
+<textarea id="product-description"> {{ section.settings.product-description }} </textarea>
+<p id="quantity">Price : rs. 200</p>
+
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'link' %}
+      <div class="link" {{ block.shopify_attributes }}>
+        {{ block.settings.linktext | link_to: block.settings.linkurl }}
+      </div>
+
+    {% when 'custom-text' %}
+      <div class="text" {{ block.shopify_attributes }}>{{ block.settings['custom-text-field'] }}</div>
+  {% endcase %}
+
+  {% for collection in collections %}
+    <h2>{{ collection.title }}</h2>
+    <p>{{ collection.description }}</p>
+    {{ block.settings.image | img_url: 'master' | img_tag }}
+  {% endfor %}
+
+  {% case block.type %}
+    {% when 'title' %}
+      <h2>{{ product.title | escape }}</h2>
+
+    {% when 'price' %}
+      {{ product.price }}
+
+    {% when 'vendor' %}
+      {%- if product.vendor -%}
+        <p>{{ product.vendor }}</p>
+      {%- endif -%}
+
+    {% when 'description' %}
+      <p>{{ product.description }}</p>
+  {% endcase %}
+{% endfor %}
+
+{% schema %}
+{
+  "name":"custom-Products",
+  "tag": "section",
+  "class": "products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Custom Products"
+    },
+       {
+        "type": "checkbox",
+        "id": "include_padding",
+        "default": true,
+        "label": "Make section margins the same as theme"
+      },
+    {
+      "type":"image_picker",
+      "id":"product-image",
+      "label":"image"
+    },
+     {
+      "type":"number",
+      "id":"quantity",
+      "label": "number"
+    },
+    {
+  "type": "radio",
+  "id": "logo_aligment",
+  "label": "Logo alignment",
+  "options": [
+    {
+      "value": "left",
+      "label": "Left"
+    },
+    {
+      "value": "centered",
+      "label": "Centered"
+    },
+      {
+      "value": "right",
+      "label": "right"
+    }
+  ],
+  "default": "left"
+    },
+
+    {
+  "type": "range",
+  "id": "title_size",
+  "min": 12,
+  "max": 24,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+    {
+  "type": "textarea",
+  "id": "product-description",
+  "label": "Product Description",
+  "default": "Welcome to as fashion! enjoy shopping here!!"
+},
+    {
+  "type": "blog",
+  "id": "blog",
+  "label": "Blog"
+},
+    {
+  "type": "collection",
+  "id": "collection",
+  "label": "Collection"
+}
+
+  ],
+
+   "max_blocks": 8,
+  "blocks": [
+       {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "price",
+        "name": "Price",
+        "limit": 1
+      },
+      {
+        "type": "vendor",
+        "name": "Vendor",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name": "Description",
+        "limit": 1
+        },
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "id": "linkurl",
+          "type": "url",
+          "label": "URL link"
+        },
+        {
+          "id": "linktext",
+          "type": "text",
+          "label": "Link text"
+        }
+      ]
+    },
+    {
+      "type": "custom-text",
+      "name": "Custom Text",
+      "settings": [
+        {
+          "id": "custom-text-field",
+          "type": "textarea",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name":"custom-Products"
+    }
+  ]
+}
+{% endschema %}

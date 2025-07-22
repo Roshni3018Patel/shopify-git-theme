@@ -1,0 +1,56 @@
+#optionsQuiz{
+  padding-right: 250px;
+}
+#addToCartQuiz{
+cursor: pointer;
+  }
+h2 {
+              text-align: center;
+              color: RebeccaPurple;
+          }
+
+          h1 {
+              text-align: center;
+              color: gray;
+          }
+
+          button {
+              width: 150px;
+              height: 40px;
+              margin: 10px;
+          }
+
+          .quiz-container {
+              border: 2px solid black;
+              width: 600px;
+              margin: 20px auto;
+              background-color: LightGray;
+              padding: 10px;
+          }
+
+          .question-form {
+              padding: 10px;
+              margin-bottom: 10px;
+          }
+
+         .quizOpt {
+          margin-bottom: 5px; 
+          padding: 5px;
+             
+      }
+          .products {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-around;
+              padding: 20px;
+              margin-top: 20px;
+          }
+
+          .product-card {
+              width: calc(33.33% - 40px);
+              margin-bottom: 20px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              padding: 20px;
+              box-sizing: border-box;
+          }
