@@ -46,23 +46,22 @@
 {
   "name": "Custom-Product",
   "settings": [
-     {
-    "type": "inline_richtext",
-    "id": "title",
-    "default": "Products",
-    "label": "Heading"
-  },
-     {
-    "type": "product",
-    "id": "product",
-    "label": "Select Product"
-  }
-
-  ],
-  "blocks":[
-     {
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Products",
+      "label": "Heading"
+    },
+    {
       "type": "product",
-      "name": "product",
+      "id": "product",
+      "label": "Select Product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product",
       "settings": [
         {
           "type": "product",
@@ -72,7 +71,7 @@
       ]
     }
   ],
-    "max_blocks": 10,
+  "max_blocks": 10,
   "presets": [
     {
       "name": "Custom-Product"
